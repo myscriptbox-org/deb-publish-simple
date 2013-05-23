@@ -1,4 +1,4 @@
 This command installs the simulation server locally on your own machine. It requires to have entered the following configurations:{br}
-{b}domain:name{/b}
+{b}domain:name{/b}{br}
 sudo {program} simul-server -install 
 

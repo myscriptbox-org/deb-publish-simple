@@ -1,6 +1,6 @@
 This command installs the server on the domain from which to publish the programs. It requires to have entered the following configurations:{br}
-{b}defaults:email_signature, name_signature, {/b}
-{b}domain:name, root_pwd, user_name, user_pwd{/b}
+{b}defaults:email_signature, name_signature, {/b}{br}
+{b}domain:name, root_pwd, user_name, user_pwd{/b}{br}
 Example:{br}
 {program} file.field domain name -set packages.myserver.org{br}
 {program} server -install{br}

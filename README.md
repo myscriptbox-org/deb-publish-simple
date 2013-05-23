@@ -29,6 +29,9 @@ This command removes a default distro/release for which to publish the scriptbox
 **deb-publish-simple** distro.release ubuntu raring -remove-default
 
 ### distro-releases -show
+This command shows the default distro/releases to which to publish programs. Example:  
+**deb-publish-simple** distro-releases -show
+
 ### file [obj] -show
 This command shows all the default values for **defaults** or **domain**. Example:  
 **deb-publish-simple** file defaults -show  
@@ -50,14 +53,14 @@ John Doe
 
 ### folder [obj] -publish
 This command publishes a scriptbox folder to all the default distributions. It requires to have entered the following configurations:  
-**defaults:email_signature, name_signature**
-**domain:name, user_name, user_pwd**
+**defaults:email_signature, name_signature**  
+**domain:name, user_name, user_pwd**  
 Example:  
 **deb-publish-simple** folder myprogram -publish
 
 ### folder [obj] -unpublish
 This command unpublishes a scriptbox folder from all the default distributions. It requires to have entered the following configurations:  
-**domain:name, user_name**
+**domain:name, user_name**  
 **deb-publish-simple** folder myprogram -unpublish
 
 ### folder [obj] -apply-defaults
@@ -66,8 +69,8 @@ This command applies the **defaults** to a particular scriptbox folder. Example:
 
 ### server -install
 This command installs the server on the domain from which to publish the programs. It requires to have entered the following configurations:  
-**defaults:email_signature, name_signature, **
-**domain:name, root_pwd, user_name, user_pwd**
+**defaults:email_signature, name_signature, **  
+**domain:name, root_pwd, user_name, user_pwd**  
 Example:  
 **deb-publish-simple** file.field domain name -set packages.myserver.org  
 **deb-publish-simple** server -install  
@@ -83,12 +86,12 @@ This command will uninstall all server components on server _packages.myserver.o
 
 ### simul-server -uninstall
 This command uninstalls the simulation server locally. It requires to have entered the following configurations:  
-**domain:name**
+**domain:name**  
 sudo **deb-publish-simple** simul-server -uninstall 
 
 ### simul-server -install
 This command installs the simulation server locally on your own machine. It requires to have entered the following configurations:  
-**domain:name**
+**domain:name**  
 sudo **deb-publish-simple** simul-server -install 
 
 ## ENVIRONMENT 

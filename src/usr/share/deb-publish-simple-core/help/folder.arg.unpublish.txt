@@ -1,4 +1,4 @@
 This command unpublishes a scriptbox folder from all the default distributions. It requires to have entered the following configurations:{br}
-{b}domain:name, user_name{/b}
+{b}domain:name, user_name{/b}{br}
 {program} folder myprogram -unpublish
 
