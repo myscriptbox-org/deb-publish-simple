@@ -6,6 +6,31 @@
 **deb-publish-simple** [objectPath] [ objectId1 ... objectIdN ] -action [ actionArg1 .. actionArgM]
 
 ## DESCRIPTION 
+### distro.release
+Use this object path to manage distro/releases. Example: ubuntu raring. You can add/remove a distro/release from the default distro/releases to which you publish your programs. 
+
+### distro-releases
+Use this object path to view or all manage all distro/releases.
+
+### file
+There are two default files containing default configuration fields: **defaults** and **domain**. Use this object path to view or manage these default files.
+
+### file.field
+You can add any default field of your own choosing to the **defaults** and **domain** files. The following are standard and mandatory  
+**defaults:** email_signature, name_signature  
+**domain:**name, root_pwd, user_name, user_pwd  
+You can add any field that you would like to add by default to the _build.conf_ file in the **defaults** file.
+
+### folder
+A scriptbox program is contained in a folder. Use this object path to carry out operations on scriptbox program folders.
+
+### server
+Use this object path to perform operations on the publication server.
+
+### simul-server
+Use this object path to install or unstall a simulation publication server locally.
+
+
 ## OPTIONS
 
 ### --help
@@ -69,7 +94,7 @@ This command applies the **defaults** to a particular scriptbox folder. Example:
 
 ### server -install
 This command installs the server on the domain from which to publish the programs. It requires to have entered the following configurations:  
-**defaults:email_signature, name_signature, **  
+**defaults:email_signature, name_signature**  
 **domain:name, root_pwd, user_name, user_pwd**  
 Example:  
 **deb-publish-simple** file.field domain name -set packages.myserver.org  

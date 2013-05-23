@@ -1,0 +1,25 @@
+[[distro.release]]
+Use this object path to manage distro/releases. Example: ubuntu raring. You can add/remove a distro/release from the default distro/releases to which you publish your programs. 
+
+[[distro-releases]]
+Use this object path to view or all manage all distro/releases.
+
+[[file]]
+There are two default files containing default configuration fields: {b}defaults{/b} and {b}domain{/b}. Use this object path to view or manage these default files.
+
+[[file.field]]
+You can add any default field of your own choosing to the {b}defaults{/b} and {b}domain{/b} files. The following are standard and mandatory{br}
+{b}defaults:{/b} email_signature, name_signature{br}
+{b}domain:{/b}name, root_pwd, user_name, user_pwd{br}
+You can add any field that you would like to add by default to the {i}build.conf{/i} file in the {b}defaults{/b} file.
+
+[[folder]]
+A scriptbox program is contained in a folder. Use this object path to carry out operations on scriptbox program folders.
+
+[[server]]
+Use this object path to perform operations on the publication server.
+
+[[simul-server]]
+Use this object path to install or unstall a simulation publication server locally.
+
+
