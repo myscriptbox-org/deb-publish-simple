@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+#-------------------------------------------------------
+# Written by Erik Poupaert
+# Phnom Penh, Cambodia, May 2013
+# Licensed under the General Public License (GPL)
+#-------------------------------------------------------
+source "$UTIL_FOLDER/args.fix-whitespace"
+
+confFile="$1"
+fieldName="$2"
+
+file="$CONF_FOLDER/$confFile.conf"
+
+if [ ! -f "$file" ] ; then
+	echo "ERROR: '$file' does not exist" >&2
+        exit 1
+fi
+
+cat "$file" | grep "^ *$fieldName=" | sed "s/$fieldName='\(.*\)'/\1/"
+

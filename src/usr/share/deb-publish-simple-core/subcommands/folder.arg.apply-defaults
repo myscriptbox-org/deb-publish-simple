@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+#-------------------------------------------------------
+# Written by Erik Poupaert
+# Phnom Penh, Cambodia, May 2013
+# Licensed under the General Public License (GPL)
+#-------------------------------------------------------
+source "$UTIL_FOLDER/args.fix-whitespace"
+
+folder="$1"
+
+if [ ! -f $DEFAULTS_FILE ] ; then
+        exit 0
+fi
+
+SED_REGEX="s/\(.*\)='\(.*\)'/"
+while read line; do
+        fieldName=$(echo "$line" | sed "$SED_REGEX\1/")
+        fieldValue=$(echo "$line" | sed "$SED_REGEX\2/")
+        msb-make folder.conf-field "$folder" "$fieldName" -set "$fieldValue" > /dev/null
+done < $DEFAULTS_FILE 
+

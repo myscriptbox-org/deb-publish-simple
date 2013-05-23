@@ -1,0 +1,4 @@
+This command uninstalls the simulation server locally. It requires to have entered the following configurations:{br}
+{b}domain:name{/b}
+sudo {program} simul-server -uninstall 
+

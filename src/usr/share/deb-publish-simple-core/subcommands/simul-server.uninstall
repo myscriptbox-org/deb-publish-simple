@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+#-------------------------------------------------------
+# Written by Erik Poupaert
+# Phnom Penh, Cambodia, May 2013
+# Licensed under the General Public License (GPL)
+#-------------------------------------------------------
+
+domain=$($THIS_SCRIPT field domain -show-default)
+
+if [ "$domain" = "" ] ; then
+        echo "ERROR: configure default domain first with" >&2
+        echo "$THIS_SCRIPT file.field domain name -set [domain]" >&2
+        exit 1
+fi
+
+msb-simul-server etc-hosts.domain "$domain" -delete
+msb-simul-server server.ssh -uninstall
+

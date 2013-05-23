@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+#-------------------------------------------------------
+# Written by Erik Poupaert
+# Phnom Penh, Cambodia, May 2013
+# Licensed under the General Public License (GPL)
+#-------------------------------------------------------
+source "$UTIL_FOLDER/args.fix-whitespace"
+
+confFile="$1"
+fieldName="$2"
+
+if [ ! -d $CONF_FOLDER ] ; then
+        exit 0
+fi
+
+if [ ! "$confFile" = "defaults" ] && [ ! "$confFile" = "domain" ] ; then
+	echo "ERROR: only 'defaults' or 'domain' are allowed" >&2
+	exit 1
+fi
+
+file="$CONF_FOLDER/$confFile.conf"
+
+if [ ! -f "$file" ] ; then
+        exit 0
+fi
+
+tmpFile=/tmp/defaults.conf.$$
+cat $file | grep -v "$fieldName=" > $tmpFile
+rm $file
+mv $tmpFile $file
+

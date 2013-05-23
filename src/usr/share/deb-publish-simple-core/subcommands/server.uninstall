@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+#-------------------------------------------------------
+# Written by Erik Poupaert
+# Phnom Penh, Cambodia, May 2013
+# Licensed under the General Public License (GPL)
+#-------------------------------------------------------
+
+domain=$($THIS_SCRIPT file.field domain name -show)
+
+domain_root_pwd=$($THIS_SCRIPT file.field domain root_pwd -show)
+validate_field domain root_pwd "${domain_root_pwd}"
+
+ssh-man remote-account root@$domain -set-pwd "${domain_root_pwd}"
+ssh-man remote-account root@$domain -link
+ssh-man remote-account root@$domain -delete-pwd
+
+if [ $(deb-publish-root server root@$domain -check-if-installed) = 'yes' ] ; then
+        deb-publish-root server root@$domain -uninstall
+fi
+
+if [ $(deb-publish-root server.vhost root@$domain $domain -exists) = 'yes' ] ; then
+        deb-publish-root server.vhost root@$domain $domain -delete-with-user
+fi
+

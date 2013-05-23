@@ -1,0 +1,70 @@
+#!/usr/bin/env bash
+#-------------------------------------------------------
+# Written by Erik Poupaert
+# Phnom Penh, Cambodia, May 2013
+# Licensed under the General Public License (GPL)
+#-------------------------------------------------------
+
+source "$UTIL_FOLDER/args.fix-whitespace"
+
+folder="$1"
+
+if [ ! -d "$folder" ] ; then
+        echo "ERROR: folder $folder does not exist" >&2
+        exit 1
+fi
+
+source "$UTIL_FOLDER/field.required.validate"
+
+email_signature=$($THIS_SCRIPT file.field defaults email_signature -show)
+field_required_validate defaults email_signature "$email_signature"
+
+name_signature=$($THIS_SCRIPT file.field defaults name_signature -show)
+field_required_validate defaults name_signature "$name_signature"
+
+domain=$($THIS_SCRIPT file.field domain name -show)
+field_required_validate domain name "$domain"
+
+domain_user_name=$($THIS_SCRIPT file.field domain user_name -show)
+field_required_validate domain user_name "${domain_user_name}"
+
+deb-publish account.key ${domain_user_name}@$domain $email_signature -upload-from-gpg-man 2> /dev/null
+
+lines=()
+while read line ; do
+        lines+=("$line")
+done < $DISTRO_RELEASE_FILE
+
+for line in "${lines[@]}" ; do
+        read distrib release <<<"$line"
+
+        distribExists=$(deb-publish account.domain.distrib \
+                ${domain_user_name}@$domain $domain $distrib -exists)
+
+        if [ "$distribExists" = 'no' ] ; then
+                echo "creating distrib: $distrib ..."
+                deb-publish account.domain.distrib ${domain_user_name}@$domain $domain $distrib -add
+        fi
+
+        releaseExists=$(deb-publish account.domain.distrib.release \
+                ${domain_user_name}@$domain $domain $distrib $release -exists)
+
+        if [ "$releaseExists" = 'no' ] ; then
+                echo "creating release: $distrib $release ..."
+                deb-publish account.domain.distrib.release ${domain_user_name}@$domain \
+                        $domain $distrib $release -add
+        fi
+
+        echo "publishing $folder for $distrib $release ..."
+        
+        msb-make folder.release "$folder" $release -build
+
+        msb-make folder.account.domain.distrib.release "$folder" ${domain_user_name}@$domain \
+                    $domain $distrib $release -publish
+
+        msb-make folder.release "$folder" $release -clean
+
+done
+
+deb-publish account.key ${domain_user_name}@$domain $email_signature -delete
+

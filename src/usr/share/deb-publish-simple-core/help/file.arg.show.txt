@@ -1,0 +1,4 @@
+This command shows all the default values for {b}defaults{/b} or {b}domain{/b}. Example:{br}
+{program} file defaults -show{br}
+{program} file domain -show
+

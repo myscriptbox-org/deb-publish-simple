@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+#-------------------------------------------------------
+# Written by Erik Poupaert
+# Phnom Penh, Cambodia, May 2013
+# Licensed under the GPL
+#-------------------------------------------------------
+
+function field_required_validate
+{
+	confFile="$1"
+        fieldName="$2"
+        fieldValue="$3"
+
+        if [ "$fieldValue" = "" ] ; then
+                echo "ERROR: configure default $fieldName first with" >&2
+                echo "$THIS_SCRIPT file.field $confFile $fieldName -set [value]" >&2
+                exit 1
+        fi
+
+}
+

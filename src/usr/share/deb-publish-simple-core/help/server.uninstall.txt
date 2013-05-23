@@ -1,0 +1,7 @@
+This command uninstalls the server on the domain from which to publish the programs. 
+It requires to have entered the following configurations:{br}
+{b}domain:{/b} name, root_pwd{br}
+Example:{br}
+{program} server -uninstall{br}
+This command will uninstall all server components on server {i}packages.myserver.org{/i}
+

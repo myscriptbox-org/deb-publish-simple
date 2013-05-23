@@ -1,0 +1,5 @@
+This command outputs the value for a default configuration parameter. There are two sets of default configuration parameters: {b}defaults{/b} and {b}domain{/b}. Example:{br}
+{program} file.field defaults author_name -show{br}
+John Doe
+
+

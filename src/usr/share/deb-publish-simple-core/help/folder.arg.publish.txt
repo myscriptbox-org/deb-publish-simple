@@ -1,0 +1,6 @@
+This command publishes a scriptbox folder to all the default distributions. It requires to have entered the following configurations:{br}
+{b}defaults:email_signature, name_signature{/b}
+{b}domain:name, user_name, user_pwd{/b}
+Example:{br}
+{program} folder myprogram -publish
+

@@ -1,0 +1,37 @@
+[[ ~/.deb-publish-simple]]
+This folder contains the configuration files for {program}.
+
+[[ ~/.deb-publish-simple/defaults.conf]]
+This file can contain any field that you would like to copy automatically with {b}apply-defaults{/b} to your program folder.{b}
+{i}Mandatory fields:{/i}{br}
+{b}email_signature{/b}: Default signatory email.{br}
+{b}name_signature{/b}: Default signatory name.{br}
+{br}
+{i}Optional fields:{/i}{br}
+{b}author_name{/b}: Default author name.{br}
+{b}author_email{/b}: Default author email.{br}
+{b}report_bugs{/b}: Default person to report bugs to.{br}
+{b}license{/b}: Default license.{br}
+{b}home_page{/b}: Default home page.{br}
+{b}urgency{/b}: Default debian urgency level.{br}
+{b}deb_section{/b}: Default debian section.{br}
+{b}deb_priority{/b}: Default debian priority.{br}
+{b}man_section{/b}: Default man page section priority; which is by convention a number.{br}
+{br}
+{i}Unlikely fields:{/i}{br}
+{b}deb_other_build_dependencies{/b}: Default comma-separated list of other build dependencies.{br}
+{b}deb_dependencies{/b}: Default comma-separated list of dependencies.{br}
+{b}deb_replaces{/b}: Default list of packages to replace.{br}
+
+[[ ~/.deb-publish-simple/domain.conf]]
+{i}Mandatory fields:{/i}{br}
+{b}name:{/b} Default domain name.{br}
+{b}root_pwd:{/b} Root password for the repository server publishing the domain.{br}
+{b}user_name:{/b} User account in which to manage the domain on the repository server.{br}
+{b}user_pwd:{/b} Password for the user account in which to manage the domain on the repository server.{br}
+
+[[ ~/.deb-publish-simple/distro-releases.conf]]
+This file contains one line per distro/release to which to publish by default. Example:{br}
+ubuntu precise{br}
+ubuntu raring{br}
+

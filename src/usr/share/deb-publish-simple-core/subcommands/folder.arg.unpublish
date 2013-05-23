@@ -1,0 +1,38 @@
+#!/usr/bin/env bash
+#-------------------------------------------------------
+# Written by Erik Poupaert
+# Phnom Penh, Cambodia, May 2013
+# Licensed under the General Public License (GPL)
+#-------------------------------------------------------
+
+source "$UTIL_FOLDER/args.fix-whitespace"
+
+folder="$1"
+
+if [ ! -d "$folder" ] ; then
+        echo "ERROR: folder $folder does not exist" >&2
+        exit 1
+fi
+
+source "$UTIL_FOLDER/field.required.validate"
+
+domain=$($THIS_SCRIPT file.field domain name -show)
+field_required_validate domain name "$domain"
+
+domain_user_name=$($THIS_SCRIPT file.field domain user_name -show)
+field_required_validate domain user_name "${domain_user_name}"
+
+lines=()
+while read line ; do
+        lines+=("$line")
+done < $DISTRO_RELEASE_FILE
+
+for line in "${lines[@]}" ; do
+        read distrib release <<<"$line"
+
+        echo "unpublishing $folder for $distrib $release ..."
+        
+        msb-make folder.account.domain.distrib.release "$folder" ${domain_user_name}@$domain \
+                    $domain $distrib $release -unpublish
+done
+
