@@ -1,0 +1,3 @@
+This command shows the {b}deb-client{/b} installation instructions for the distrib/release specified. Example:{br}
+{program} distrib.release ubuntu raring -show-deb-client-install
+

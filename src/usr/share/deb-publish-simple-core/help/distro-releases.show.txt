@@ -1,3 +1,0 @@
-This command shows the default distro/releases to which to publish programs. Example:{br}
-{program} distro-releases -show
-

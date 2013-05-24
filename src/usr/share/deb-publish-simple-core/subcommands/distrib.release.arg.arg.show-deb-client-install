@@ -6,15 +6,14 @@
 #-------------------------------------------------------
 source "$UTIL_FOLDER/args.fix-whitespace"
 
-distro="$1"
+distrib="$1"
 release="$2"
 
-if [ -f $DISTRO_RELEASE_FILE ] ; then
-        tmpFile=$DISTRO_RELEASE_FILE.$$
-        cat $DISTRO_RELEASE_FILE | grep -v "$distro $release" > $tmpFile
-        rm -f $DISTRO_RELEASE_FILE
-        mv $tmpFile $DISTRO_RELEASE_FILE
-fi
+source "$UTIL_FOLDER/field.required.validate"
 
-echo "$distro $release" >> $DISTRO_RELEASE_FILE
+domain=$($THIS_SCRIPT file.field domain name -show)
+field_required_validate domain name "$domain"
+
+echo "sudo deb-client key http://$domain/gpg.key -add"
+echo "sudo deb-client repo.url.release $domain http://$domain/apt/$distrib $release -add"
 

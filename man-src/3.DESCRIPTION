@@ -1,8 +1,8 @@
-[[distro.release]]
-Use this object path to manage distro/releases. Example: ubuntu raring. You can add/remove a distro/release from the default distro/releases to which you publish your programs. 
+[[distrib.release]]
+Use this object path to manage distrib/releases. Example: ubuntu raring. You can add/remove a distro/release from the default distrib/releases to which you publish your programs. 
 
-[[distro-releases]]
-Use this object path to view or all manage all distro/releases.
+[[distrib-releases]]
+Use this object path to view or all manage all distrib/releases.
 
 [[file]]
 There are two default files containing default configuration fields: {b}defaults{/b} and {b}domain{/b}. Use this object path to view or manage these default files.

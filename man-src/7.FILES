@@ -30,8 +30,8 @@ This file can contain any field that you would like to copy automatically with {
 {b}user_name:{/b} User account in which to manage the domain on the repository server.{br}
 {b}user_pwd:{/b} Password for the user account in which to manage the domain on the repository server.{br}
 
-[[ ~/.deb-publish-simple/distro-releases.conf]]
-This file contains one line per distro/release to which to publish by default. Example:{br}
+[[ ~/.deb-publish-simple/distrib-releases.conf]]
+This file contains one line per distrib/release to which to publish by default. Example:{br}
 ubuntu precise{br}
 ubuntu raring{br}
 

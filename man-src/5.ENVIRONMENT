@@ -1,0 +1,5 @@
+[[CONF_FOLDER]]
+By default, {program} will look for its configuration files in the ~/.deb-publish-simple folder. You can override this with the {b}CONF_FOLDER{/b} environment variable. Example:{br}
+CONF_FOLDER=/home/john/deb-conf-alternative {program} ...{br}
+Setting the variable just before invoking {program} will point the CONF_FOLDER elsewhere.
+

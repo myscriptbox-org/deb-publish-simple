@@ -1,3 +1,0 @@
-This command adds a default distro/release for which to publish the programs. Example:{br}
-{program} distro.release ubuntu raring -add-default
-

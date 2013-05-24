@@ -1,2 +1,4 @@
 show
+show-direct-install
+show-deb-client-install
 

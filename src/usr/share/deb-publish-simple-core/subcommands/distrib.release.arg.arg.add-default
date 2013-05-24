@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+#-------------------------------------------------------
+# Written by Erik Poupaert
+# Phnom Penh, Cambodia, May 2013
+# Licensed under the General Public License (GPL)
+#-------------------------------------------------------
+source "$UTIL_FOLDER/args.fix-whitespace"
+
+distrib="$1"
+release="$2"
+
+if [ -f $DISTRIB_RELEASE_FILE ] ; then
+        tmpFile=$DISTRIB_RELEASE_FILE.$$
+        cat $DISTRIB_RELEASE_FILE | grep -v "$distrib $release" > $tmpFile
+        rm -f $DISTRIB_RELEASE_FILE
+        mv $tmpFile $DISTRIB_RELEASE_FILE
+fi
+
+echo "$distrib $release" >> $DISTRIB_RELEASE_FILE
+

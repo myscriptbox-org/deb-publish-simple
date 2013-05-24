@@ -5,9 +5,9 @@
 # Licensed under the General Public License (GPL)
 #-------------------------------------------------------
 
-if [ ! -f $DISTRO_RELEASE_FILE ] ; then
+if [ ! -f $DISTRIB_RELEASE_FILE ] ; then
         exit 0
 fi
 
-cat $DISTRO_RELEASE_FILE
+cat $DISTRIB_RELEASE_FILE
 

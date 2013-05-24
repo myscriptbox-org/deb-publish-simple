@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+#-------------------------------------------------------
+# Written by Erik Poupaert
+# Phnom Penh, Cambodia, May 2013
+# Licensed under the General Public License (GPL)
+#-------------------------------------------------------
+
+source "$UTIL_FOLDER/field.required.validate"
+
+domain=$($THIS_SCRIPT file.field domain name -show)
+field_required_validate domain name "$domain"
+
+while read line; do
+        read distrib release <<<"$line"
+        echo "== $distrib/$release =="
+        $THIS_SCRIPT distrib.release $distrib $release -show-direct-install
+done < $DISTRIB_RELEASE_FILE
+

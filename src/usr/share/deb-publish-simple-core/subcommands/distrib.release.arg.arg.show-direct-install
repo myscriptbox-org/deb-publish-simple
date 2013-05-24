@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+#-------------------------------------------------------
+# Written by Erik Poupaert
+# Phnom Penh, Cambodia, May 2013
+# Licensed under the General Public License (GPL)
+#-------------------------------------------------------
+source "$UTIL_FOLDER/args.fix-whitespace"
+
+distrib="$1"
+release="$2"
+
+source "$UTIL_FOLDER/field.required.validate"
+
+domain=$($THIS_SCRIPT file.field domain name -show)
+field_required_validate domain name "$domain"
+
+echo " wget -q -O - http://$domain/gpg.key |  sudo apt-key add -"
+echo "echo "deb http://$domain/apt/$distrib $release main" | \\"
+echo "      sudo tee -a /etc/apt/sources.list.d/$domain.list"
+echo "echo "deb-src http://$domain/apt/$distrib $release main" | \\"
+echo "      sudo tee -a /etc/apt/sources.list.d/$domain.list"
+

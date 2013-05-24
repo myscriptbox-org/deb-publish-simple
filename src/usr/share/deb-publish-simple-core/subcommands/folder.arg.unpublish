@@ -25,7 +25,7 @@ field_required_validate domain user_name "${domain_user_name}"
 lines=()
 while read line ; do
         lines+=("$line")
-done < $DISTRO_RELEASE_FILE
+done < $DISTRIB_RELEASE_FILE
 
 for line in "${lines[@]}" ; do
         read distrib release <<<"$line"

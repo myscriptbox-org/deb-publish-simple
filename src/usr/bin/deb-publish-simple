@@ -5,7 +5,7 @@ export CONF_FOLDER=${CONF_FOLDER:-$HOME/.deb-publish-simple}
 
 export DEFAULTS_FILE=$CONF_FOLDER/defaults.conf
 export DOMAIN_FILE=$CONF_FOLDER/domain.conf
-export DISTRO_RELEASE_FILE=$CONF_FOLDER/distro-releases.conf
+export DISTRIB_RELEASE_FILE=$CONF_FOLDER/distrib-releases.conf
 #-------------------------------------------------------
 # Basic location variables
 #-------------------------------------------------------

@@ -33,7 +33,7 @@ deb-publish account.key ${domain_user_name}@$domain $email_signature -upload-fro
 lines=()
 while read line ; do
         lines+=("$line")
-done < $DISTRO_RELEASE_FILE
+done < $DISTRIB_RELEASE_FILE
 
 for line in "${lines[@]}" ; do
         read distrib release <<<"$line"

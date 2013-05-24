@@ -1,0 +1,3 @@
+This command removes a default distrib/release for which to publish the scriptbox programs for. Example:{br}
+{program} distrib.release ubuntu raring -remove-default
+
