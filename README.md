@@ -6,11 +6,11 @@
 **deb-publish-simple** [objectPath] [ objectId1 ... objectIdN ] -action [ actionArg1 .. actionArgM]
 
 ## DESCRIPTION 
-### distro.release
-Use this object path to manage distro/releases. Example: ubuntu raring. You can add/remove a distro/release from the default distro/releases to which you publish your programs. 
+### distrib.release
+Use this object path to manage distrib/releases. Example: ubuntu raring. You can add/remove a distro/release from the default distrib/releases to which you publish your programs. 
 
-### distro-releases
-Use this object path to view or all manage all distro/releases.
+### distrib-releases
+Use this object path to view or all manage all distrib/releases.
 
 ### file
 There are two default files containing default configuration fields: **defaults** and **domain**. Use this object path to view or manage these default files.
@@ -45,17 +45,25 @@ shows the program's version.
 ### --license
 shows the program's license.
 
-### distro.release.arg [obj] -add-default
-This command adds a default distro/release for which to publish the programs. Example:  
-**deb-publish-simple** distro.release ubuntu raring -add-default
+### distrib.release.arg [obj] -show-direct-install
+This command shows the direct installation instructions for the distrib/release specified. Example:  
+**deb-publish-simple** distrib.release ubuntu raring -show-direct-install
 
-### distro.release.arg [obj] -remove-default
-This command removes a default distro/release for which to publish the scriptbox programs for. Example:  
-**deb-publish-simple** distro.release ubuntu raring -remove-default
+### distrib.release.arg [obj] -remove-default
+This command removes a default distrib/release for which to publish the scriptbox programs for. Example:  
+**deb-publish-simple** distrib.release ubuntu raring -remove-default
 
-### distro-releases -show
-This command shows the default distro/releases to which to publish programs. Example:  
-**deb-publish-simple** distro-releases -show
+### distrib.release.arg [obj] -show-deb-client-install
+This command shows the **deb-client** installation instructions for the distrib/release specified. Example:  
+**deb-publish-simple** distrib.release ubuntu raring -show-deb-client-install
+
+### distrib.release.arg [obj] -add-default
+This command adds a default distrib/release for which to publish the programs. Example:  
+**deb-publish-simple** distrib.release ubuntu raring -add-default
+
+### distrib-releases -show
+This command shows the default distrib/releases to which to publish programs. Example:  
+**deb-publish-simple** distrib-releases -show
 
 ### file [obj] -show
 This command shows all the default values for **defaults** or **domain**. Example:  
@@ -66,15 +74,24 @@ This command shows all the default values for **defaults** or **domain**. Exampl
 This command removes the value for a default configuration parameter. There are two sets of default configuration parameters: **defaults** and **domain**. Example:  
 **deb-publish-simple** file.field defaults author_name -remove
 
-### file.field.arg [obj] -set [arg]
-This command sets the value for a default configuration parameter. There are two sets of default configuration parameters: **defaults** and **domain**. Example:  
-**deb-publish-simple** file.field defaults author_name -set "John Doe"
-
 ### file.field.arg [obj] -show
 This command outputs the value for a default configuration parameter. There are two sets of default configuration parameters: **defaults** and **domain**. Example:  
 **deb-publish-simple** file.field defaults author_name -show  
 John Doe
 
+
+### file.field.arg [obj] -set [arg]
+This command sets the value for a default configuration parameter. There are two sets of default configuration parameters: **defaults** and **domain**. Example:  
+**deb-publish-simple** file.field defaults author_name -set "John Doe"
+
+### folder [obj] -apply-defaults
+This command applies the **defaults** to a particular scriptbox folder. Example:  
+**deb-publish-simple** myprogram -apply-defaults
+
+### folder [obj] -unpublish
+This command unpublishes a scriptbox folder from all the default distributions. It requires to have entered the following configurations:  
+**domain:name, user_name**  
+**deb-publish-simple** folder myprogram -unpublish
 
 ### folder [obj] -publish
 This command publishes a scriptbox folder to all the default distributions. It requires to have entered the following configurations:  
@@ -83,14 +100,13 @@ This command publishes a scriptbox folder to all the default distributions. It r
 Example:  
 **deb-publish-simple** folder myprogram -publish
 
-### folder [obj] -unpublish
-This command unpublishes a scriptbox folder from all the default distributions. It requires to have entered the following configurations:  
-**domain:name, user_name**  
-**deb-publish-simple** folder myprogram -unpublish
-
-### folder [obj] -apply-defaults
-This command applies the **defaults** to a particular scriptbox folder. Example:  
-**deb-publish-simple** myprogram -apply-defaults
+### server -uninstall
+This command uninstalls the server on the domain from which to publish the programs. 
+It requires to have entered the following configurations:  
+**domain:** name, root_pwd  
+Example:  
+**deb-publish-simple** server -uninstall  
+This command will uninstall all server components on server _packages.myserver.org_
 
 ### server -install
 This command installs the server on the domain from which to publish the programs. It requires to have entered the following configurations:  
@@ -101,25 +117,22 @@ Example:
 **deb-publish-simple** server -install  
 This command will install all server components required on server _packages.myserver.org_
 
-### server -uninstall
-This command uninstalls the server on the domain from which to publish the programs. 
-It requires to have entered the following configurations:  
-**domain:** name, root_pwd  
-Example:  
-**deb-publish-simple** server -uninstall  
-This command will uninstall all server components on server _packages.myserver.org_
+### simul-server -install
+This command installs the simulation server locally on your own machine. It requires to have entered the following configurations:  
+**domain:name**  
+sudo **deb-publish-simple** simul-server -install 
 
 ### simul-server -uninstall
 This command uninstalls the simulation server locally. It requires to have entered the following configurations:  
 **domain:name**  
 sudo **deb-publish-simple** simul-server -uninstall 
 
-### simul-server -install
-This command installs the simulation server locally on your own machine. It requires to have entered the following configurations:  
-**domain:name**  
-sudo **deb-publish-simple** simul-server -install 
-
 ## ENVIRONMENT 
+### CONF_FOLDER
+By default, **deb-publish-simple** will look for its configuration files in the ~/.deb-publish-simple folder. You can override this with the **CONF_FOLDER** environment variable. Example:  
+CONF_FOLDER=/home/john/deb-conf-alternative **deb-publish-simple** ...  
+Setting the variable just before invoking **deb-publish-simple** will point the CONF_FOLDER elsewhere.
+
 ## EXIT-STATUS 
 ### 0
 A zero exit code means that everything went ok.
@@ -161,8 +174,8 @@ _Mandatory fields:_
 **user_name:** User account in which to manage the domain on the repository server.  
 **user_pwd:** Password for the user account in which to manage the domain on the repository server.  
 
-###  ~/.deb-publish-simple/distro-releases.conf
-This file contains one line per distro/release to which to publish by default. Example:  
+###  ~/.deb-publish-simple/distrib-releases.conf
+This file contains one line per distrib/release to which to publish by default. Example:  
 ubuntu precise  
 ubuntu raring  
 
