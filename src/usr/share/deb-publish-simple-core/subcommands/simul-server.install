@@ -5,7 +5,7 @@
 # Licensed under the General Public License (GPL)
 #-------------------------------------------------------
 
-domain=$($THIS_SCRIPT field domain -show-default)
+domain=$($THIS_SCRIPT file.field domain domain -show)
 
 if [ "$domain" = "" ] ; then
         echo "ERROR: configure default domain first with" >&2
