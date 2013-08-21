@@ -5,7 +5,10 @@
 # Licensed under the General Public License (GPL)
 #-------------------------------------------------------
 
+source "$UTIL_FOLDER/field.required.validate"
+
 domain=$($THIS_SCRIPT file.field domain name -show)
+field_required_validate domain name "$domain"
 
 domain_root_pwd=$($THIS_SCRIPT file.field domain root_pwd -show)
 validate_field domain root_pwd "${domain_root_pwd}"

@@ -5,13 +5,10 @@
 # Licensed under the General Public License (GPL)
 #-------------------------------------------------------
 
-domain=$($THIS_SCRIPT field domain -show-default)
+source "$UTIL_FOLDER/field.required.validate"
 
-if [ "$domain" = "" ] ; then
-        echo "ERROR: configure default domain first with" >&2
-        echo "$THIS_SCRIPT file.field domain name -set [domain]" >&2
-        exit 1
-fi
+domain=$($THIS_SCRIPT file.field domain name -show)
+field_required_validate domain name "$domain"
 
 msb-simul-server etc-hosts.domain "$domain" -delete
 msb-simul-server server.ssh -uninstall
