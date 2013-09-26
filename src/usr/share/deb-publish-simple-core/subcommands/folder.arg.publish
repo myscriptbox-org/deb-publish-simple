@@ -28,7 +28,7 @@ field_required_validate domain name "$domain"
 domain_user_name=$($THIS_SCRIPT file.field domain user_name -show)
 field_required_validate domain user_name "${domain_user_name}"
 
-deb-publish account.key ${domain_user_name}@$domain $email_signature -upload-from-gpg-man 2> /dev/null
+deb-publish account.key ${domain_user_name}@$domain $email_signature -upload-from-gpg-man
 
 lines=()
 while read line ; do
