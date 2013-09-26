@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+#-------------------------------------------------------
+# Written by Erik Poupaert
+# Phnom Penh, Cambodia, May 2013
+# Licensed under the General Public License (GPL)
+#-------------------------------------------------------
+
+source "$UTIL_FOLDER/args.fix-whitespace"
+
+folder="$1"
+
+if [ ! -d "$folder" ] ; then
+        echo "ERROR: folder $folder does not exist" >&2
+        exit 1
+fi
+
+rm -rf ~/.deb-publish-simple
+cp -R "$folder" ~/.deb-publish-simple
+

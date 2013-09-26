@@ -37,6 +37,11 @@ if [ $? -ne 0 ] ; then
         ssh-man remote-account root@$domain -delete-pwd
         exit 1
 fi
+
+#remember original owner.group of ssh folder
+origUser=$(stat -c '%U' /home/$USER/.ssh)
+origGroup=$(stat -c '%G' /home/$USER/.ssh)
+
 ssh-man remote-account root@$domain -delete-pwd
 
 if [ $(deb-publish-root server root@$domain -check-if-installed) = 'no' ] ; then
@@ -56,4 +61,7 @@ if [ $(deb-publish account.domain ${domain_user_name}@$domain $domain -pubkey-ex
         deb-publish account.domain ${domain_user_name}@$domain \
                  $domain -upload-pubkey-from-gpg-man $email_signature
 fi
+
+#put back the original user/group
+chown -R $origUser.$origGroup /home/$user/ssh
 
