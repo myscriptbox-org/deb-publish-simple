@@ -7,12 +7,6 @@
 
 source "$UTIL_FOLDER/field.required.validate"
 
-email_signature=$($THIS_SCRIPT file.field defaults email_signature -show)
-field_required_validate defaults email_signature "$email_signature"
-
-name_signature=$($THIS_SCRIPT file.field defaults name_signature -show)
-field_required_validate defaults name_signature "$name_signature"
-
 domain=$($THIS_SCRIPT file.field domain name -show)
 
 field_required_validate domain name "$domain"
@@ -25,10 +19,6 @@ field_required_validate domain user_name "${domain_user_name}"
 
 domain_user_pwd=$($THIS_SCRIPT file.field domain user_pwd -show)
 field_required_validate domain user_pwd "${domain_user_pwd}"
-
-if [ $(gpg-man key.private $email_signature -exists) = 'no' ] ; then
-        gpg-man key $email_signature -create "$name_signature"
-fi
 
 ssh-man remote-account root@$domain -set-pwd "${domain_root_pwd}"
 ssh-man remote-account root@$domain -link
@@ -58,11 +48,6 @@ fi
 ssh-man remote-account ${domain_user_name}@$domain -set-pwd "${domain_user_pwd}"
 ssh-man remote-account ${domain_user_name}@$domain -link
 ssh-man remote-account ${domain_user_name}@$domain -delete-pwd
-
-if [ $(deb-publish account.domain ${domain_user_name}@$domain $domain -pubkey-exists) ] ; then
-        deb-publish account.domain ${domain_user_name}@$domain \
-                 $domain -upload-pubkey-from-gpg-man $email_signature
-fi
 
 #put back the original user/group
 if [ ! $USER = 'root' ] ; then
