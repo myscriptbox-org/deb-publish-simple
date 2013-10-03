@@ -16,11 +16,31 @@ fi
 
 source "$UTIL_FOLDER/field.required.validate"
 
-email_signature=$($THIS_SCRIPT file.field defaults email_signature -show)
+#load these fields from the build.conf file in the package
+#email_signature
+#name_signature
+source "$folder/build.conf"
 field_required_validate defaults email_signature "$email_signature"
-
-name_signature=$($THIS_SCRIPT file.field defaults name_signature -show)
 field_required_validate defaults name_signature "$name_signature"
+
+keyExists=$(gpg-man key.private "$email_signature" -exists)
+
+if [ $keyExists = "no" ] ; then
+	echo "ERROR: cannot find gpg key $email_signature mentioned in build.conf" >&2
+	exit 1
+fi
+
+default_email_signature=$($THIS_SCRIPT file.field defaults email_signature -show)
+if [ ! "$default_email_signature" = "$email_signature" ] ; then
+	echo "WARNING: build.conf email signature '$email_signature' " >&2
+	echo "different from default '$default_email_signature'" >&2
+fi
+
+default_name_signature=$($THIS_SCRIPT file.field defaults name_signature -show)
+if [ ! "$default_name_signature" = "$name_signature" ] ; then
+	echo "WARNING: build.conf name signature '$name_signature' " >&2
+	echo "different from default '$default_name_signature'" >&2
+fi
 
 domain=$($THIS_SCRIPT file.field domain name -show)
 field_required_validate domain name "$domain"
