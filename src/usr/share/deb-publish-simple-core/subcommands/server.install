@@ -39,8 +39,10 @@ if [ $? -ne 0 ] ; then
 fi
 
 #remember original owner.group of ssh folder
-origUser=$(stat -c '%U' /home/$USER/.ssh)
-origGroup=$(stat -c '%G' /home/$USER/.ssh)
+if [ ! $USER = 'root' ] ; then
+	origUser=$(stat -c '%U' $HOME/.ssh)
+	origGroup=$(stat -c '%G' $HOME/.ssh)
+fi
 
 ssh-man remote-account root@$domain -delete-pwd
 
@@ -63,5 +65,7 @@ if [ $(deb-publish account.domain ${domain_user_name}@$domain $domain -pubkey-ex
 fi
 
 #put back the original user/group
-chown -R $origUser.$origGroup /home/$user/ssh
+if [ ! $USER = 'root' ] ; then
+	chown -R $origUser.$origGroup $HOME/ssh
+fi
 
