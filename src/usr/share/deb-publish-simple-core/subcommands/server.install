@@ -36,9 +36,9 @@ fi
 
 ssh-man remote-account root@$domain -delete-pwd
 
-if [ $(deb-publish-root server root@$domain -check-if-installed) = 'no' ] ; then
+#if [ $(deb-publish-root server root@$domain -check-if-installed) = 'no' ] ; then
         deb-publish-root server root@$domain -install
-fi
+#fi
 
 if [ $(deb-publish-root server.vhost root@$domain $domain -exists) = 'no' ] ; then
         deb-publish-root server.vhost root@$domain $domain \
