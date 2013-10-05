@@ -4,7 +4,7 @@
 # Phnom Penh, Cambodia, May 2013
 # Licensed under the General Public License (GPL)
 #-------------------------------------------------------
-
+source "$UTIL_FOLDER/msb.debug"
 if [ ! -f $DISTRIB_RELEASE_FILE ] ; then
         exit 0
 fi
