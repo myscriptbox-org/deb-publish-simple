@@ -19,9 +19,18 @@ source "$UTIL_FOLDER/field.required.validate"
 #load these fields from the build.conf file in the package
 #email_signature
 #name_signature
+
 source "$folder/build.conf"
-field_required_validate defaults email_signature "$email_signature"
-field_required_validate defaults name_signature "$name_signature"
+
+if [ "$email_signature" = "" ] ; then
+	echo "ERROR: $folder/build.conf does not have a valid email_signature" >&2
+	exit 1
+fi
+
+if [ "$name_signature" = "" ] ; then
+	echo "ERROR: $folder/build.conf does not have a valid name_signature" >&2
+	exit 1
+fi
 
 keyExists=$(gpg-man key.private "$email_signature" -exists)
 
