@@ -56,6 +56,7 @@ domain_user_name=$($THIS_SCRIPT file.field domain user_name -show)
 field_required_validate domain user_name "${domain_user_name}"
 
 deb-publish account.key ${domain_user_name}@$domain $email_signature -upload-from-gpg-man
+deb-publish account.domain ${domain_user_name}@$domain $domain -upload-pubkey-from-gpg-man $email_signature
 
 lines=()
 while read line ; do
