@@ -17,9 +17,6 @@ fi
 source "$UTIL_FOLDER/field.required.validate"
 
 #load these fields from the build.conf file in the package
-#email_signature
-#name_signature
-
 source "$folder/build.conf"
 
 if [ "$email_signature" = "" ] ; then
@@ -38,14 +35,18 @@ if [ $keyExists = "no" ] ; then
 	gpg-man key "$email_signature" -create "$name_signature"
 else
 	default_email_signature=$($THIS_SCRIPT file.field defaults email_signature -show)
-	if [ ! "$default_email_signature" = "$email_signature" ] ; then
-		echo "WARNING: build.conf email signature '$email_signature' " >&2
-		echo "different from default '$default_email_signature'" >&2
+	if [ ! "$default_email_signature" = "" ] ; then
+		if [ ! "$default_email_signature" = "$email_signature" ] ; then
+			echo "WARNING: build.conf email signature '$email_signature' " >&2
+			echo "different from default '$default_email_signature'" >&2
+		fi
 	fi
 	default_name_signature=$($THIS_SCRIPT file.field defaults name_signature -show)
-	if [ ! "$default_name_signature" = "$name_signature" ] ; then
-		echo "WARNING: build.conf name signature '$name_signature' " >&2
-		echo "different from default '$default_name_signature'" >&2
+	if [ ! "$default_name_signature" = "" ] ; then
+		if [ ! "$default_name_signature" = "$name_signature" ] ; then
+			echo "WARNING: build.conf name signature '$name_signature' " >&2
+			echo "different from default '$default_name_signature'" >&2
+		fi
 	fi
 fi
 

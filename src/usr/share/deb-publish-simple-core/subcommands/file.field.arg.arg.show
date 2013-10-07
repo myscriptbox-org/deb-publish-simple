@@ -13,8 +13,7 @@ fieldName="$2"
 file="$CONF_FOLDER/$confFile.conf"
 
 if [ ! -f "$file" ] ; then
-	echo "ERROR: '$file' does not exist" >&2
-        exit 1
+        exit 0
 fi
 
 cat "$file" | grep "^ *$fieldName=" | sed "s/$fieldName='\(.*\)'/\1/"
